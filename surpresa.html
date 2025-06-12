@@ -131,9 +131,8 @@
     <div class="mensagem-final">Obrigado por estar comigo, meu amor! ❤️</div>
   </div>
   
-  <audio autoplay loop>
-  <source src="music/sua-musica.mp3" type="audio/mpeg" /> 
-  </audio>
+  
+  <audio id="audioSurpresa" src="music/sua-musica.mp3" loop></audio> 
 
 
   <script>
@@ -167,6 +166,19 @@
   	    "Você é tudo que pedi em silêncio.",
   	    "Nosso amor é escrito nas estrelas."
     ];
+
+
+  window.addEventListener('load', () => {
+    if (localStorage.getItem('tocarMusica') === 'sim') {
+      const audio = document.getElementById('audioSurpresa');
+      audio.play().catch(() => {
+        // Pode falhar se navegador bloquear, aí você pode avisar o usuário
+        console.log('Clique para ativar o som');
+      });
+      // Remove a flag para não tocar de novo ao recarregar
+      localStorage.removeItem('tocarMusica');
+    }
+  });
 
     function criarBalao(frase) {
       const container = document.createElement('div');
