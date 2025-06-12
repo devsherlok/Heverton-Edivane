@@ -222,6 +222,16 @@
   </style>
 </head>
 <body>
+	<!-- TELA INICIAL -->
+<div id="tela-inicial">
+  <!-- conteúdo da tela inicial (login, frases, botão surpresa...) -->
+</div>
+
+<!-- TELA SURPRESA FINAL (inicialmente escondida) -->
+<div id="tela-surpresa" style="display: none;">
+  <!-- conteúdo da página surpresa: balões, frases, corações -->
+</div>
+
 
   <div class="coracoes" id="coracoes"></div>
 
@@ -257,10 +267,8 @@
   </div>
 
   <div class="digitando" id="mensagemDigitando"></div>
-
-  <a href="surpresa.html" class="whatsapp-button">
-  Surpresa Final 💌
-  </a>
+  
+<button onclick="mostrarSurpresa()">Surpresa Final 💌</button>
 
   <script>
  
@@ -369,6 +377,10 @@
     progress.addEventListener("input", () => {
       audio.currentTime = progress.value;
     });
+function mostrarSurpresa() {
+  document.getElementById('tela-inicial').style.display = 'none';
+  document.getElementById('tela-surpresa').style.display = 'flex';
+}
   </script>
 </body>
 </html>
