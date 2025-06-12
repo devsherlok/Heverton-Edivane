@@ -11,42 +11,53 @@
       overflow: hidden;
       background: linear-gradient(to top, #ffe6f0, #fff);
       font-family: 'Montserrat', sans-serif;
+      height: 100vh;
       position: relative;
+    }
+
+    .conteudo {
+      position: relative;
+      z-index: 10;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      text-align: center;
+      pointer-events: none;
     }
 
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 2.5em;
+      font-size: 3.0em;
       color: #d4006a;
       margin-bottom: 20px;
-      z-index: 10;
-      position: relative;
     }
 
     .mensagem-final {
-      font-size: 1.5em;
+      font-size: 2.0em;
       color: #b8006e;
       margin-top: 20px;
-      text-align: center;
-      z-index: 10;
-      position: relative;
     }
 
-    /* Container para os balões, para facilitar a animação lateral */
+    .baloes-container, .coracoes {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
     .balao-container {
       position: absolute;
       bottom: 0;
+      animation-name: lateral;
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
       animation-direction: alternate;
-      user-select: none;
-      pointer-events: none;
-      animation-name: lateral;
     }
 
     .balao {
@@ -87,18 +98,6 @@
       100% { transform: translateX(0); }
     }
 
-    /* Corações flutuantes, igual na página principal */
-    .coracoes {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-
     .coracao {
       position: absolute;
       width: 20px;
@@ -122,64 +121,73 @@
   </style>
 </head>
 <body>
+
+  <div class="baloes-container" id="baloes"></div>
   <div class="coracoes" id="coracoes"></div>
 
-  <h1>Para sempre nós 💘</h1>
-  <div class="mensagem-final">Obrigado por estar comigo, meu amor!❤️</div>
+  <div class="conteudo">
+    <h1>Para sempre nós 💘</h1>
+    <div class="mensagem-final">Obrigado por estar comigo, meu amor! ❤️</div>
+  </div>
 
   <script>
     const frases = [
-      "Você é meu lar.",
-      "Seu sorriso ilumina meus dias.",
-      "Te amo mais do que palavras dizem.",
-      "Com você, tudo faz sentido.",
-      "Cada momento ao seu lado é mágico.",
-      "Você me completa.",
-      "Você é meu sempre.",
-      "Juntos somos perfeitos.",
-      "Você é especial."
+        "Você é meu lar.",
+        "Seu sorriso ilumina meus dias.",
+        "Te amo mais do que palavras dizem.",
+        "Com você, tudo faz sentido.",
+        "Cada momento ao seu lado é mágico.",
+        "Você me completa.",
+        "Você é meu sempre.",
+        "Juntos somos perfeitos.",
+  	    "Você é meu pedaço de céu.",
+  	    "Te encontrei e me encontrei.",
+  	    "Amar você é minha melhor escolha.",
+  	    "Seu amor é meu porto seguro.",
+  	    "Cada batida do meu coração diz seu nome.",
+  	    "Ao seu lado, tudo é poesia.",
+  	    "Com você, sou mais eu.",
+  	    "Te amo hoje, amanhã e sempre.",
+  	    "Você transforma dias comuns em magia.",
+  	    "Meu sorriso tem você por trás.",
+  	    "Você é meu sonho mais bonito.",
+  	    "Nosso amor é meu lugar favorito.",
+  	    "Você me faz acreditar no para sempre.",
+  	    "Seu abraço é meu lar.",
+  	    "Nosso amor é a melhor parte da minha história.",
+ 	      "Com você, a vida é mais leve.",
+ 	      "Amar você é viver em festa.",
+  	    "Seu olhar acalma meu mundo.",
+  	    "Você é tudo que pedi em silêncio.",
+  	    "Nosso amor é escrito nas estrelas."
     ];
 
     function criarBalao(frase) {
-      // Cria container para aplicar animação lateral separada da subida
       const container = document.createElement('div');
       container.className = 'balao-container';
-
-      // Posicionar horizontalmente entre 10% e 80% da viewport
       container.style.left = (10 + Math.random() * 70) + 'vw';
 
-      // Duração aleatória da animação lateral (vai e volta)
       const duracaoLateral = 3 + Math.random() * 2;
       container.style.animationDuration = duracaoLateral + 's';
 
-      // Duração da subida vertical
       const duracaoSubida = 8 + Math.random() * 4;
 
-      // Criar o balão
       const balao = document.createElement('div');
       balao.className = 'balao';
       balao.textContent = frase;
-
-      // Aplicar animação subir no balão
       balao.style.animation = `subir ${duracaoSubida}s linear forwards`;
 
-      // Inserir balão no container
       container.appendChild(balao);
+      document.getElementById('baloes').appendChild(container);
 
-      // Inserir container na página
-      document.body.appendChild(container);
-
-      // Remover depois do fim da animação de subida
       setTimeout(() => container.remove(), duracaoSubida * 1000);
     }
 
-    // Cria um balão a cada 1.2 segundos
     setInterval(() => {
       const frase = frases[Math.floor(Math.random() * frases.length)];
       criarBalao(frase);
     }, 1200);
 
-    // Corações flutuantes (igual index)
     function criarCoracao() {
       const coracao = document.createElement('div');
       coracao.classList.add('coracao');
@@ -188,6 +196,7 @@
       document.getElementById('coracoes').appendChild(coracao);
       setTimeout(() => coracao.remove(), 7000);
     }
+
     setInterval(criarCoracao, 400);
   </script>
 </body>
