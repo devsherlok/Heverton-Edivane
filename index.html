@@ -272,7 +272,10 @@
 
   <script>
  
-	
+  function mostrarSurpresa() {
+  	document.getElementById('tela-inicial').style.display = 'none';
+  	document.getElementById('tela-surpresa').style.display = 'flex';
+  }
   // Slide com swipe + autoplay
   let index = 0;
   const slides = document.getElementById("slideContainer");
@@ -377,10 +380,6 @@
     progress.addEventListener("input", () => {
       audio.currentTime = progress.value;
     });
-function mostrarSurpresa() {
-  document.getElementById('tela-inicial').style.display = 'none';
-  document.getElementById('tela-surpresa').style.display = 'flex';
-}
   </script>
 </body>
 </html>
