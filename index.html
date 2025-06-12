@@ -262,47 +262,53 @@
   </a>
 
   <script>
- 
-	
-  // Slide com swipe + autoplay
+
   let index = 0;
   const slides = document.getElementById("slideContainer");
   const totalSlides = slides.children.length;
   let startX = 0;
   let endX = 0;
+  let autoSlideInterval;
 
   function showSlide(i) {
     index = (i + totalSlides) % totalSlides;
     slides.style.transform = `translateX(-${index * 100}%)`;
   }
 
-  // Swipe
+  function startAutoplay() {
+    autoSlideInterval = setInterval(() => {
+      showSlide(index + 1);
+    }, 3000);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoSlideInterval);
+  }
+
   slides.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
+    stopAutoplay(); // para enquanto o usuário toca
   });
 
   slides.addEventListener("touchend", (e) => {
     endX = e.changedTouches[0].clientX;
     handleSwipe();
+    startAutoplay(); // retoma depois do swipe
   });
 
   function handleSwipe() {
     const diff = startX - endX;
     if (Math.abs(diff) > 30) {
       if (diff > 0) {
-        showSlide(index + 1); // swiped left
+        showSlide(index + 1); // esquerda
       } else {
-        showSlide(index - 1); // swiped right
+        showSlide(index - 1); // direita
       }
     }
   }
 
-  // Autoplay
-  setInterval(() => {
-    showSlide(index + 1);
-  }, 3000); // 3 segundos
-
   showSlide(index);
+  startAutoplay();
 
     // Contador
     const dataInicio = new Date("2023-03-03T00:00:00"); // Ajuste a data
