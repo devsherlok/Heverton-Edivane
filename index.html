@@ -258,11 +258,17 @@
 
   <div class="digitando" id="mensagemDigitando"></div>
   <div id="tela-inicial">
-      <a href="surpresa.html" class="whatsapp-button">Surpresa Final 💌</a>
+      <a href="surpresa.html" id="btnSurpresa" class="whatsapp-button">Surpresa Final 💌</a>
   </div>
   
   <script>
- 
+  const btnSurpresa = document.getElementById('btnSurpresa');
+
+  btnSurpresa.addEventListener('click', () => {
+    // Armazena que o usuário clicou na surpresa para tocar música
+    localStorage.setItem('tocarMusica', 'sim');
+  });
+    
   // Slide com swipe + autoplay
   let index = 0;
   const slides = document.getElementById("slideContainer");
