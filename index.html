@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nosso Amor 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to bottom, #ffd6eb, #fff0f6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 20px;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .coracoes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .coracao {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: flutuar 6s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes flutuar {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.0em;
+      margin: 10px 0 20px;
+      color: #d4006a;
+      text-align: center;
+    }
+
+    .slider {
+      width: 100%;
+      max-width: 300px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      z-index: 1;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      flex-shrink: 0;
+      border-radius: 20px;
+    }
+
+    .slider-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 10px 0;
+      z-index: 1;
+    }
+
+    .slider-buttons button {
+      background-color: #ff4f94;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .contador {
+      margin: 20px 0;
+      font-size: 1.1em;
+      color: #b8006e;
+      text-align: center;
+    }
+
+    .player-spotify {
+      display: flex;
+      align-items: center;
+      background: #121212;
+      color: white;
+      border-radius: 20px;
+      padding: 15px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      gap: 15px;
+      z-index: 1;
+      margin-bottom: 20px;
+    }
+
+    .player-spotify .cover img {
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .player-spotify .info {
+      flex: 1;
+    }
+
+    .player-spotify h3 {
+      margin: 0;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    .player-spotify p {
+      margin: 5px 0 10px;
+      font-size: 0.9em;
+      color: #bbb;
+    }
+
+    .player-spotify .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .player-spotify button {
+      background: #9e005d;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      color: white;
+      font-size: 1.2em;
+      cursor: pointer;
+    }
+
+    .player-spotify input[type="range"] {
+      flex: 1;
+      appearance: none;
+      height: 5px;
+      background: #444;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .player-spotify input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      background: #9e005d;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .digitando {
+      font-size: 1.2em;
+      text-align: center;
+      color: #9e005d;
+      min-height: 50px;
+      margin: 20px auto;
+      max-width: 90%;
+      z-index: 1;
+    }
+
+    .whatsapp-button {
+      display: inline-block;
+      margin-top: 20px;
+      background-color: #9e005d;
+      color: white;
+      font-weight: bold;
+      padding: 12px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1em;
+      animation: pulsar 2s infinite;
+      z-index: 1;
+    }
+
+    @keyframes pulsar {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @media (max-width: 500px) {
+      .slides img {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="coracoes" id="coracoes"></div>
+
+  <h1>Feliz dia dos Namorados 💖</h1>
+
+  <div class="slider">
+    <div class="slides" id="slideContainer">
+      <img src="img/image1.jpg" alt="Foto 1"/>
+      <img src="img/image2.jpg" alt="Foto 2"/>
+      <img src="img/image3.jpg" alt="Foto 3"/>
+      <img src="img/image4.jpg" alt="Foto 4"/>
+      <img src="img/image5.jpg" alt="Foto 5"/>
+      <img src="img/image6.jpg" alt="Foto 6"/>
+      <img src="img/image7.jpg" alt="Foto 7"/>
+    </div>
+  </div>
+
+  <div class="contador" id="contador"></div>
+
+  <div class="player-spotify">
+    <div class="cover">
+      <img src="img/lisboaimg.png" alt="Capa da música" />
+    </div>
+    <div class="info">
+      <h3>I Wanna Be Yours</h3>
+      <p>Arctic Monkeys</p>
+      <div class="controls">
+        <button id="playPause">❤️</button>
+        <input type="range" id="progress" value="0" min="0" step="1"/>
+      </div>
+    </div>
+    <audio id="audioPlayer" src="music/sua-musica.mp3"></audio>
+  </div>
+
+  <div class="digitando" id="mensagemDigitando"></div>
+
+  <a href="https://wa.me/5555999677384" target="_blank" class="whatsapp-button">
+    Feliz dia 12 💖
+  </a>
+
+  <script>
+ 
+	
+  // Slide com swipe + autoplay
+  let index = 0;
+  const slides = document.getElementById("slideContainer");
+  const totalSlides = slides.children.length;
+  let startX = 0;
+  let endX = 0;
+
+  function showSlide(i) {
+    index = (i + totalSlides) % totalSlides;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  // Swipe
+  slides.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  slides.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+
+  function handleSwipe() {
+    const diff = startX - endX;
+    if (Math.abs(diff) > 30) {
+      if (diff > 0) {
+        showSlide(index + 1); // swiped left
+      } else {
+        showSlide(index - 1); // swiped right
+      }
+    }
+  }
+
+  // Autoplay
+  setInterval(() => {
+    showSlide(index + 1);
+  }, 3000); // 3 segundos
+
+  showSlide(index);
+
+    // Contador
+    const dataInicio = new Date("2023-03-03T00:00:00"); // Ajuste a data
+    function atualizarContador() {
+      const agora = new Date();
+      const diff = agora - dataInicio;
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = agora.getHours();
+      const minutos = agora.getMinutes();
+      const segundos = agora.getSeconds();
+      document.getElementById("contador").textContent =
+        `Estamos juntos há: ${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+    }
+    setInterval(atualizarContador, 1000);
+
+    // Mensagem digitando
+    const texto = "A vida é mais leve ao seu lado. O seu jeito, seu carinho, seu amor… tudo em você me traz paz. Você me inspira a ser alguém melhor a cada dia. Cada momento ao seu lado é indescritível — tão único quanto você. Você me fascina, me encanta, me transforma. Te amo infinito! 💘";
+    const msg = document.getElementById("mensagemDigitando");
+    let pos = 0;
+    function escreverMensagem() {
+      if (pos < texto.length) {
+        msg.innerHTML += texto.charAt(pos);
+        pos++;
+        setTimeout(escreverMensagem, 60);
+      }
+    }
+    escreverMensagem();
+
+    // Corações flutuantes
+    function criarCoracao() {
+      const coracao = document.createElement('div');
+      coracao.classList.add('coracao');
+      coracao.style.left = Math.random() * 100 + 'vw';
+      coracao.style.animationDuration = (4 + Math.random() * 3) + 's';
+      document.getElementById('coracoes').appendChild(coracao);
+      setTimeout(() => coracao.remove(), 7000);
+    }
+    setInterval(criarCoracao, 400);
+
+    // Player Spotify
+    const audio = document.getElementById("audioPlayer");
+    const playBtn = document.getElementById("playPause");
+    const progress = document.getElementById("progress");
+
+    let isPlaying = false;
+
+    playBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        audio.pause();
+        playBtn.textContent = "▶️";
+      } else {
+        audio.play();
+        playBtn.textContent = "⏸️";
+      }
+      isPlaying = !isPlaying;
+    });
+
+    audio.addEventListener("timeupdate", () => {
+      progress.max = audio.duration;
+      progress.value = audio.currentTime;
+    });
+
+    progress.addEventListener("input", () => {
+      audio.currentTime = progress.value;
+    });
+  </script>
+</body>
+</html>
