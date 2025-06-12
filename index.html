@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/833/833472.png"> 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nosso Amor 💖</title>
@@ -258,58 +257,52 @@
 
   <div class="digitando" id="mensagemDigitando"></div>
 
-  <a href="https://wa.me/5555999677384" target="_blank" class="whatsapp-button">
-    Feliz dia 12 💖
+  <a href="surpresa.html" class="whatsapp-button">
+  Surpresa Final 💌
   </a>
 
   <script>
-
+ 
+	
+  // Slide com swipe + autoplay
   let index = 0;
   const slides = document.getElementById("slideContainer");
   const totalSlides = slides.children.length;
   let startX = 0;
   let endX = 0;
-  let autoSlideInterval;
 
   function showSlide(i) {
     index = (i + totalSlides) % totalSlides;
     slides.style.transform = `translateX(-${index * 100}%)`;
   }
 
-  function startAutoplay() {
-    autoSlideInterval = setInterval(() => {
-      showSlide(index + 1);
-    }, 3000);
-  }
-
-  function stopAutoplay() {
-    clearInterval(autoSlideInterval);
-  }
-
+  // Swipe
   slides.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
-    stopAutoplay(); // para enquanto o usuário toca
   });
 
   slides.addEventListener("touchend", (e) => {
     endX = e.changedTouches[0].clientX;
     handleSwipe();
-    startAutoplay(); // retoma depois do swipe
   });
 
   function handleSwipe() {
     const diff = startX - endX;
     if (Math.abs(diff) > 30) {
       if (diff > 0) {
-        showSlide(index + 1); // esquerda
+        showSlide(index + 1); // swiped left
       } else {
-        showSlide(index - 1); // direita
+        showSlide(index - 1); // swiped right
       }
     }
   }
 
+  // Autoplay
+  setInterval(() => {
+    showSlide(index + 1);
+  }, 3000); // 3 segundos
+
   showSlide(index);
-  startAutoplay();
 
     // Contador
     const dataInicio = new Date("2023-03-03T00:00:00"); // Ajuste a data
@@ -321,7 +314,7 @@
       const minutos = agora.getMinutes();
       const segundos = agora.getSeconds();
       document.getElementById("contador").textContent =
-        `Te amo há: ${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
+        `Estamos juntos há: ${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
     }
     setInterval(atualizarContador, 1000);
 
